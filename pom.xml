@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.meinders</groupId>
-    <artifactId>lithium-ews</artifactId>
+    <artifactId>ews</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
 
       <!-- Config general -->
-      <maven.compiler.source>1.7</maven.compiler.source>
-      <maven.compiler.target>1.7</maven.compiler.target>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
 
       <!-- Default encoding -->
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

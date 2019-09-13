@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - JerseyApplication",
+            "request": "launch",
+            "mainClass": "lithium.io.server.JerseyApplication",
+            "projectName": "lithium-ews"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ServletContainer",
+            "request": "launch",
+            "mainClass": "lithium.io.server.ServletContainer",
+            "projectName": "lithium-ews"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "lithium.io.server.App",
+            "projectName": "lithium-ews"
+        }
+    ]
+}

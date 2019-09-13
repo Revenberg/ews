@@ -1,0 +1,6 @@
+rowid,group_id,value_type,key,value
+1,1,6,FileType,11
+2,1,1,ID,48
+3,2,5,Show_Reference,0
+4,2,5,One_Verse_Per_Slide,0
+5,3,2,Minimum_Size_Limit,0.116666666666667

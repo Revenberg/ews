@@ -29,7 +29,7 @@ public class Resource_Text {
 
     private static int nextRowId() {
         if (rowid == 0) {
-            rowid = SqliteDatabase.getMaxRowId("resource_text");
+            rowid = Schedule.db.getMaxRowId("resource_text");
         }
         rowid = rowid + 1;
         return rowid;
@@ -40,7 +40,7 @@ public class Resource_Text {
         int resource_id = Resource.addResource(6);
         sql = "INSERT INTO 'resource_text' ('rowid','resource_id','rtf') VALUES (" + Integer.toString(nextRowId()) + ","
                 + Integer.toString(resource_id) + ",'" + rtf + "');";
-        SqliteDatabase.executeUpdate(sql);
+        Schedule.db.executeUpdate(sql);
         return resource_id;
     }
 }

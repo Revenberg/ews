@@ -27,7 +27,7 @@ public class ResourceImage {
 
     private static int nextRowId() {
         if (rowid == 0) {
-            rowid = SqliteDatabase.getMaxRowId("resource_image");
+            rowid = Schedule.db.getMaxRowId("resource_image");
         }
         rowid = rowid + 1;
         return rowid;
@@ -42,7 +42,7 @@ public class ResourceImage {
                 + "VALUES (" + Integer.toString(nextRowId()) + "," + Integer.toString(resource_id) + "," + Integer.toString(filenr) + ",'<images>"
                 + fileName + "'," + Long.toString(file.length()) + ", " + Long.toString(file.lastModified())
                 + ",1744,1216);";
-        SqliteDatabase.executeUpdate(sql);
+                Schedule.db.executeUpdate(sql);
         return resource_id;
     }
 

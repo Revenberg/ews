@@ -39,8 +39,9 @@ import java.util.logging.Logger;
  */
 public class Schedule {
 	private static Logger log = Logger.getLogger(Schedule.class.getName());
+	public static SqliteDatabase db = new SqliteDatabase();
 
-	public Schedule() {
+	public Schedule() {		
 	}
 
 /*	public void addPresentation(String title) throws SQLException {
@@ -91,21 +92,21 @@ public class Schedule {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		SqliteDatabase.open(dest + "/main.db");
+		db.open(dest + "/main.db");
 
 		
-		SqliteDatabase.executeUpdate("BEGIN TRANSACTION;");
-		SqliteDatabase.executeUpdate("DELETE from 'slide'");
-		SqliteDatabase.executeUpdate("DELETE from 'element'");
-		SqliteDatabase.executeUpdate("DELETE from 'presentation'");
-		SqliteDatabase.executeUpdate("DELETE from 'element_property'");		
-		SqliteDatabase.executeUpdate("DELETE from 'element_property_group'");		
-		SqliteDatabase.executeUpdate("COMMIT;");
+		db.executeUpdate("BEGIN TRANSACTION;");
+		db.executeUpdate("DELETE from 'slide'");
+		db.executeUpdate("DELETE from 'element'");
+		db.executeUpdate("DELETE from 'presentation'");
+		db.executeUpdate("DELETE from 'element_property'");		
+		db.executeUpdate("DELETE from 'element_property_group'");		
+		db.executeUpdate("COMMIT;");
 	}
 
 	public void close(String src, String dest) throws IOException {
 		log.info("close");
-		SqliteDatabase.close();
+		db.close();
 		
 			final File folder = new File(src);
 

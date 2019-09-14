@@ -25,7 +25,7 @@ public class DbFile {
 
     private static int nextRowId() {
         if (rowid == 0) {
-            rowid = SqliteDatabase.getMaxRowId("file");
+            rowid = Schedule.db.getMaxRowId("file");
         }
         rowid = rowid + 1;
         return rowid;
@@ -34,7 +34,7 @@ public class DbFile {
     public static int addFile(String fileName) throws SQLException {
         String sql = "INSERT INTO 'file' ('rowid','file_hash','filename','shared_filename') VALUES ("
                 + Integer.toString(nextRowId()) + ",'','" + fileName + "',NULL);";
-        SqliteDatabase.executeUpdate(sql);
+        Schedule.db.executeUpdate(sql);
         return rowid;
     }
 

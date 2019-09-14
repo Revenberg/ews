@@ -31,7 +31,7 @@ public class Slide {
 
         private int nextRowId() {
                 if (rowid == 0) {
-                        rowid = SqliteDatabase.getMaxRowId("slide");
+                        rowid = Schedule.db.getMaxRowId("slide");
                 }
                 rowid = rowid + 1;
                 return rowid;
@@ -43,7 +43,7 @@ public class Slide {
                                 + " VALUES (" + Integer.toString(nextRowId()) + "," + Integer.toString(presentation_id2)
                                 + ",'Master','MASTER',NULL,0,2083,NULL,'SONG',NULL,NULL," + Tools.randomNumber(19) + ","
                                 + Tools.randomNumber(19) + "," + Tools.randomNumber(19) + ",NULL);";
-                SqliteDatabase.executeUpdate(sql);
+                                Schedule.db.executeUpdate(sql);
                 return rowid;
         }
 
@@ -55,7 +55,7 @@ public class Slide {
                                 + ",'','" + Tools.uuid() + "',NULL," + Integer.toString(order)
                                 + ","+Integer.toString(layout_flag)+",2,'MASTER',NULL,NULL," + Tools.randomNumber(19) + "," + id + "," + id
                                 + ",NULL);";
-                SqliteDatabase.executeUpdate(sql);
+                                Schedule.db.executeUpdate(sql);
                 order++;
                 return rowid;
         }
@@ -68,7 +68,7 @@ public class Slide {
                                 + ",'','" + Tools.uuid() + "',NULL," + Integer.toString(order)
                                 + ",3,2,'BLANK',NULL,NULL," + Tools.randomNumber(19)
                                 + "," + id + "," + id + ",NULL);";
-                SqliteDatabase.executeUpdate(sql);
+                                Schedule.db.executeUpdate(sql);
                 order++;
                 return rowid;
         }

@@ -5,11 +5,13 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+
+import lithium.io.server.model.Role;
 import lithium.io.server.model.User;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -22,67 +24,62 @@ import org.eclipse.jetty.http.HttpStatus;
 public class UserManagementController {
     private static Logger log = Logger.getLogger(UserManagementController.class.getName());
 
-    @GET
-    @Path("test")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getMessage(@QueryParam("email") String msg) {
-        return Response.status(HttpStatus.OK_200).entity(msg).build();
-    }
-
     @POST
     @Path("add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createUser(User user) {        
-        User.addUser(user);
-        user.setMe("");
+    public Response createUser(User user) throws SQLException {
+        user.add();
         return Response.status(200).entity(user).build();
     }
 
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllUsers() {
+    public Response getAllUsers() throws SQLException {
 
-        List<User> users = User.getAllUsers();        
+        List<User> users = User.getList();
 
         if (users.isEmpty()) {
             return Response.status(HttpStatus.NOT_FOUND_404).build();
         } else {
-            GenericEntity<List<User>> list = new GenericEntity<List<User>>(users){};
+            GenericEntity<List<User>> list = new GenericEntity<List<User>>(users) {
+            };
             return Response.status(HttpStatus.OK_200).entity(list).build();
         }
     }
 
     @POST
-    @Path("update/{id}")
+    @Path("delete")
     @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteUserByEmail(User user) throws SQLException {
+        user.delete();
+        return Response.status(HttpStatus.OK_200).build();
+    }
+
+    @GET
+    @Path("{id}/roles")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateUser(@PathParam("id") int id, @QueryParam("name") String name,
-            @QueryParam("email") String email) {
-        User user = new User(name, email);
-        if (User.updateUser(id, user)) {
-            return Response.status(HttpStatus.OK_200).build();
-        } else {
+    public Response getUserRolesByUserId(@PathParam("id") int id) throws SQLException {
+        log.info("getUserRolesById");
+        List<Role> roles = Role.getlistByUserId(id);
+
+        if (roles.isEmpty()) {
             return Response.status(HttpStatus.NOT_FOUND_404).build();
+        } else {
+            GenericEntity<List<Role>> list = new GenericEntity<List<Role>>(roles) {
+            };
+            return Response.status(HttpStatus.OK_200).entity(list).build();
         }
     }
 
-    @POST
-    @Path("delete/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteUserByEmail(@PathParam("id") int id) {
-        if (User.deleteUser(id)) {
-            return Response.status(HttpStatus.OK_200).build();
-        }
-        return Response.status(HttpStatus.NOT_FOUND_404).build();
-    }
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserById(@PathParam("id") int id) {
+    public Response getUserById(@PathParam("id") int id) throws SQLException {
         if (id > 0) {
-            User user = User.getUserById(id);
+            User user = User.get(id);
+
             if (user != null) {
                 return Response.status(HttpStatus.OK_200).entity(user).build();
             }

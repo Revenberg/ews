@@ -25,7 +25,7 @@ public class ElementProperty {
 
     private static int nextRowId() {
         if (rowid == 0) {
-            rowid = SqliteDatabase.getMaxRowId("element_property");
+            rowid = Schedule.db.getMaxRowId("element_property");
         }
         rowid = rowid + 1;
         return rowid;
@@ -35,7 +35,7 @@ public class ElementProperty {
         String sql = "INSERT INTO 'element_property' ('rowid','group_id','value_type','key','value') " + "VALUES ("
                 + Integer.toString(nextRowId()) + "," + Integer.toString(group_id) + "," + Integer.toString(value_type)
                 + ",'" + key + "','" + value + "');";
-        SqliteDatabase.executeUpdate(sql);
+        Schedule.db.executeUpdate(sql);
         return rowid;
     }
 

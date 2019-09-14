@@ -25,7 +25,7 @@ public class Resource {
 
     private static int nextRowId() {
         if (rowid == 0) {
-            rowid = SqliteDatabase.getMaxRowId("resource");
+            rowid = Schedule.db.getMaxRowId("resource");
         }
         rowid = rowid + 1;
         return rowid;
@@ -36,7 +36,7 @@ public class Resource {
         sql = "INSERT INTO 'resource' ('rowid','resource_hash','resource_uid','resource_type','title','author','copyright','description','tags') "
                 + "VALUES (" + Integer.toString(nextRowId()) + ",NULL,'" + Tools.uuid() + "',"
                 + Integer.toString(resource_type) + ",'','','','','');";
-        SqliteDatabase.executeUpdate(sql);
+                Schedule.db.executeUpdate(sql);
         return rowid;
     }
 
@@ -45,7 +45,7 @@ public class Resource {
         sql = "INSERT INTO 'resource' ('rowid','resource_hash','resource_uid','resource_type','title','author','copyright','description','tags') "
                 + "VALUES (" + Integer.toString(nextRowId()) + ",NULL,'" + Tools.uuid() + "',"
                 + Integer.toString(resource_type) + ",'" + fileName + "','','','','');";
-        SqliteDatabase.executeUpdate(sql);
+                Schedule.db.executeUpdate(sql);
         return rowid;
     }
 

@@ -25,7 +25,7 @@ public class ElementPropertyGroup {
 
     private static int nextRowId() {
         if (rowid == 0) {
-            rowid = SqliteDatabase.getMaxRowId("element_property_group");
+            rowid = Schedule.db.getMaxRowId("element_property_group");
         }
         rowid = rowid + 1;
         return rowid;
@@ -34,7 +34,7 @@ public class ElementPropertyGroup {
     public static int addElementPropertyGroup(int link_id, String group_name) throws SQLException {
         String sql = "INSERT INTO 'element_property_group' " + "('rowid','link_id','group_name') " + "VALUES ("
                 + Integer.toString(nextRowId()) + "," + Integer.toString(link_id) + ",'" + group_name + "');";
-        SqliteDatabase.executeUpdate(sql);
+                Schedule.db.executeUpdate(sql);
         return rowid;
     }
 

@@ -25,22 +25,25 @@ import java.util.logging.Logger;
 
 public class SqliteDatabase {
     private static Logger log = Logger.getLogger(SqliteDatabase.class.getName());
-    private static Connection connection = null;
-
-    public static void open(String databaseName) {
+    private Connection connection = null;
+    private String databaseName;
+    public void open(String databaseName) {
         try {
             Class.forName("org.sqlite.JDBC");
             // create a database connection
-            SqliteDatabase.connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
-
+            connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
+            this.databaseName = databaseName;
         } catch (SQLException | ClassNotFoundException e) {
             // if the error message is "out of memory",
             // it probably means no database file is found
             System.err.println(e.getMessage());
         }
     }
+    public String getdatabaseName() {
+        return databaseName;
+    }
 
-    public static void close() {
+    public  void close() {
         try {
             if (connection != null)
                 connection.close();
@@ -50,25 +53,27 @@ public class SqliteDatabase {
         }
     }
 
-    public static void executeUpdate(String sql) throws SQLException {
-
+    public void executeUpdate(String sql) throws SQLException {
+       log.info("executeUpdate");
+        log.info(getdatabaseName());
         Statement statement = connection.createStatement();
         statement.setQueryTimeout(30); // set timeout to 30 sec.
         log.info(sql);
-        statement.executeUpdate(sql);
+        statement.executeUpdate(sql);        
     }
 
-    public static ResultSet executeQuery(String sql) throws SQLException {
+    public ResultSet executeQuery(String sql) throws SQLException {
+        log.info("executeQuery");
         Statement statement = connection.createStatement();
         statement.setQueryTimeout(30); // set timeout to 30 sec.
         log.info(sql);
         return statement.executeQuery(sql);
     }
 
-    public static int getMaxRowId(String table) {
+    public int getMaxRowId(String table) {
         int max = 0;
         try {
-            ResultSet rs = SqliteDatabase.executeQuery("select max(rowid) as max from " + table);
+            ResultSet rs = executeQuery("select max(rowid) as max from " + table);
                 while (rs.next()) { // read the result set
                     max = rs.getInt("max");
                 }
@@ -77,5 +82,17 @@ public class SqliteDatabase {
             e.printStackTrace();
         }
         return max;
+    }
+    public boolean existsTable(String table) {
+        try {
+            log.info(this.getdatabaseName());
+            ResultSet rs = executeQuery("select name from sqlite_master where name='" + table +"';");
+                if (rs.next()) { // read the result set
+                    return true;
+                }
+        } catch (SQLException e) {
+            return false;
+        }
+        return false;
     }
 }

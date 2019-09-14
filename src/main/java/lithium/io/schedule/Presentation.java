@@ -27,7 +27,7 @@ public class Presentation {
     public Presentation(int presentation_type, String text) throws SQLException {
         log.info("presentation");
         String sql;
-        presentation_id = SqliteDatabase.getMaxRowId("presentation") + 1;
+        presentation_id = Schedule.db.getMaxRowId("presentation") + 1;
 
         if ((presentation_type == 11) || (presentation_type == 13)) {
             sql = "INSERT INTO 'presentation' ('rowid','presentation_uid','presentation_rev_uid','presentation_global_uid','presentation_type','aspect_ratio','group_level','order_index','thumbnail_slide_id','layout_revision','thumbnail_desired_rev','thumbnail_rev','thumbnail','auto_theme','looping','title','author','copyright','administrator','description','tags','reference_number','vendor_id','notes','modified_date','ready','error_no') VALUES ("
@@ -35,14 +35,14 @@ public class Presentation {
                     + Integer.toString(presentation_type) + ",''," + Integer.toString(order)
                     + ",0,NULL,NULL,NULL,NULL,NULL,1,0,'" + text
                     + "','','','','','','',NULL,'',132120916145610000,1,0);";
-            SqliteDatabase.executeUpdate(sql);
+                    Schedule.db.executeUpdate(sql);
             order++;
         }
         if ((presentation_type == 6) || (presentation_type == 8)) {
             sql = "INSERT INTO 'presentation' ('rowid','presentation_uid','presentation_rev_uid','presentation_global_uid','presentation_type','aspect_ratio','group_level','order_index','thumbnail_slide_id','layout_revision','thumbnail_desired_rev','thumbnail_rev','thumbnail','auto_theme','looping','title','author','copyright','administrator','description','tags','reference_number','vendor_id','notes','modified_date','ready','error_no') VALUES ("
                     + Integer.toString(presentation_id) + ",NULL,NULL,NULL," + Integer.toString(presentation_type)
                     + ",'',0,0,NULL,NULL,NULL,NULL,NULL,0,0,'" + text + "','','','','','','',NULL,'',NULL,1,0);";
-            SqliteDatabase.executeUpdate(sql);
+                    Schedule.db.executeUpdate(sql);
             order++;
         }
 

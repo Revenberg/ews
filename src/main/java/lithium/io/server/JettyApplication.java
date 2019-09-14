@@ -7,7 +7,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-public class JerseyApplication {
+public class JettyApplication {
 
     public static void main(String[] args) {
 
@@ -26,9 +26,8 @@ public class JerseyApplication {
             server.start();
             server.join();
         } catch (Exception ex) {
-            Logger.getLogger(JerseyApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JettyApplication.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-
             server.destroy();
         }
     }

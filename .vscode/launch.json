@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - MyProcess",
+            "request": "launch",
+            "mainClass": "test.MyProcess",
+            "projectName": "lithium-ews"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MyProcess",
+            "request": "launch",
+            "mainClass": "lithium.io.server.MyProcess",
+            "projectName": "lithium-ews"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - JettyApplication",
             "request": "launch",
             "mainClass": "lithium.io.server.JettyApplication",

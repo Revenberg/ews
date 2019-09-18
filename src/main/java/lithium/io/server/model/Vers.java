@@ -18,6 +18,8 @@ public class Vers {
     @NotNull
     private String name;
     @NotNull
+    private String location;
+    @NotNull
     private String me;
     
     public Vers() {
@@ -46,9 +48,17 @@ public class Vers {
     public void setName(final String name) {
         this.name = name;
     }
+    
+    public String getLocation() {
+        return location;
+    }
 
-    public void add() throws SQLException {
-        DBOVers.add(this);
+    public void setLocation(final String location) {
+        this.location = location;
+    }
+
+    public Vers add() throws SQLException {
+        return DBOVers.add(this);
     }
 
     public static List<Vers> getListBySongId(int songId) throws SQLException {

@@ -23,7 +23,7 @@ public class RolesManagementController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createrole(Role role) throws SQLException {
-        Role.add(role);
+        role.add();
         role.setMe("");
         return Response.status(200).entity(role).build();
     }

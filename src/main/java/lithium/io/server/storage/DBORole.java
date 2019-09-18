@@ -13,7 +13,7 @@ public class DBORole {
 
     static void createTable() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS 'role' (" + "'rowid' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
-                + "'userid' integer NOT NULL, 'name'	text," + "'active'	boolean," + "PRIMARY KEY('rowid')" + ");";
+                + "'userid' integer NOT NULL, 'name'	text," + "'active'	boolean);";
         log.info(sql);
         DBO.getDB().executeUpdate(sql);
     }

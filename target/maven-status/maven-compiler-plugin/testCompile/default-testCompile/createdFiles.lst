@@ -1,2 +1,5 @@
+lithium\io\test\MyProcess.class
+lithium\io\usermanagement\TestProcess.class
 lithium\io\schedule\TestSchedule.class
+lithium\io\test\MultipartUtility.class
 lithium\io\usermanagement\TestServer.class

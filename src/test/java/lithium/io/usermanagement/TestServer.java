@@ -131,44 +131,37 @@ public class TestServer {
 
     @Test
     public void TestmsgEndpoint() throws Exception {
-       
-//        sendGet("http://localhost:8080/rest/user/test?email=sander");
-//        assertEquals(HttpStatus.OK_200, this.responseCode);
-//        assertEquals("sander", this.responseMSG);
-//
+
         sendGet("http://localhost:8080/rest/user/user?email=sander");
         assertEquals(HttpStatus.NOT_FOUND_404, this.responseCode);
 
         sendPost("http://localhost:8080/rest/user/add/", "{\"name\":\"sander\",\"email\":\"sander@revenberg.info\"}");
         String prediction = "{\"email\":\"sander@revenberg.info\",\"id\":,\"me\":\"/rest/user/\",\"name\":\"sander\",\"roles\":[\"default\"]}";
         String real = this.responseMSG;
- 
+
         sendPost("http://localhost:8080/rest/role/add/", "{\"userid\":1,\"name\":\"test\",\"active\": true}");
- 
-        /*real = real.replaceAll("(.*)id:(.*)", "$1") + "id:\",\"me"
-                + real.replaceAll(".*me(.*)", "$1");
-        real = real.replaceAll("(.*)/rest/user/(.*)", "$1") + "/rest/user/\",\"name"
-                + real.replaceAll(".*name(.*)", "$1");
-*/
+
+        /*
+         * real = real.replaceAll("(.*)id:(.*)", "$1") + "id:\",\"me" +
+         * real.replaceAll(".*me(.*)", "$1"); real =
+         * real.replaceAll("(.*)/rest/user/(.*)", "$1") + "/rest/user/\",\"name" +
+         * real.replaceAll(".*name(.*)", "$1");
+         */
         log.info(real);
-  //      assertEquals(prediction, real);
+        // assertEquals(prediction, real);
 
         for (int i = 1; i < 5; i++) {
             sendPost("http://localhost:8080/rest/user/add/",
                     "{\"name\":\"sander " + Integer.toString(i) + "\",\"email\":\"sander@revenberg.info\"}");
         }
 
-    
     }
 
-/*    @Test
-    public void TestUserEndpoint() throws IOException {
-        String url = "http://localhost:8080/rest/msg";
-        URLConnection connection = new URL(url).openConnection();
-        try (InputStream response = connection.getInputStream(); Scanner scanner = new Scanner(response)) {
-            String responseBody = scanner.nextLine();
-            assertEquals("My message", responseBody);
-        }
-        // sendPost
-    }
-*/}
+    /*
+     * @Test public void TestUserEndpoint() throws IOException { String url =
+     * "http://localhost:8080/rest/msg"; URLConnection connection = new
+     * URL(url).openConnection(); try (InputStream response =
+     * connection.getInputStream(); Scanner scanner = new Scanner(response)) {
+     * String responseBody = scanner.nextLine(); assertEquals("My message",
+     * responseBody); } // sendPost }
+     */}

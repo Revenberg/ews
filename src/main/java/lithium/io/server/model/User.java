@@ -1,6 +1,5 @@
 package lithium.io.server.model;
 
-import org.hibernate.validator.constraints.Email;
 
 import lithium.io.server.storage.DBOUser;
 
@@ -16,7 +15,7 @@ public class User {
     private int id;
     @NotNull
     private String me;
-    @Email
+    @NotNull
     private String email;
     @NotNull
     private String name;    

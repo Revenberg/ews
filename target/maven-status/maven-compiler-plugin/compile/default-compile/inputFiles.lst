@@ -17,6 +17,7 @@ d:\git\ews\src\main\java\lithium\io\rtf\ParseException.java
 d:\git\ews\src\main\java\lithium\io\rtf\PrintingVisitor.java
 d:\git\ews\src\main\java\lithium\io\server\resources\RolesManagementController.java
 d:\git\ews\src\main\java\lithium\io\schedule\ElementPropertyGroup.java
+d:\git\ews\src\main\java\lithium\io\server\resources\SongManagementController.java
 d:\git\ews\src\main\java\lithium\io\ews\TextContent.java
 d:\git\ews\src\main\java\lithium\io\schedule\Schedule.java
 d:\git\ews\src\main\java\lithium\io\schedule\ElementProperty.java
@@ -59,6 +60,7 @@ d:\git\ews\src\main\java\lithium\io\jrtf\RtfPara.java
 d:\git\ews\src\main\java\lithium\io\jrtf\RtfText.java
 d:\git\ews\src\main\java\lithium\io\server\model\User.java
 d:\git\ews\src\main\java\lithium\io\server\model\Bundle.java
+d:\git\ews\src\main\java\lithium\io\server\resources\VersManagementController.java
 d:\git\ews\src\main\java\lithium\io\rtf\ControlWord.java
 d:\git\ews\src\main\java\lithium\io\server\model\Song.java
 d:\git\ews\src\main\java\lithium\io\ews\GradientBackground.java

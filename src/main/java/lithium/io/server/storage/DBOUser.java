@@ -8,16 +8,17 @@ import java.util.List;
 import lithium.io.server.model.User;
 
 public class DBOUser {
-    
+
     static void createTable() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS 'user' (" + "'rowid' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," + "'name'	text,"
-                + "'email'	text," + "PRIMARY KEY('rowid')" + ");";
+        String sql = "CREATE TABLE IF NOT EXISTS 'user' (" + "'rowid' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                + "'name' text,'email' text);";
         DBO.getDB().executeUpdate(sql);
     }
-    public static void add(User user) throws SQLException {        
-        String sql = "INSERT INTO 'user' ('name','email') " + "values ('"
-                + user.getName() + "','" + user.getEmail() + "');";
-        DBO.getDB().executeUpdate(sql);        
+
+    public static void add(User user) throws SQLException {
+        String sql = "INSERT INTO 'user' ('name','email') " + "values ('" + user.getName() + "','" + user.getEmail()
+                + "');";
+        DBO.getDB().executeUpdate(sql);
     }
 
     public static User get(int id) throws SQLException {
@@ -52,7 +53,7 @@ public class DBOUser {
             User user = new User();
             user.setId(rs.getInt("rowid"));
             user.setName(rs.getString("name"));
-            user.setEmail(rs.getString("email"));            
+            user.setEmail(rs.getString("email"));
             users.add(user);
         }
         return users;

@@ -1,5 +1,6 @@
 package lithium.io.server.storage;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import lithium.io.schedule.SqliteDatabase;
@@ -27,6 +28,24 @@ public class DBO {
             DBOSong.createTable();
         }
     }
+
+    public int getMaxRowId(String table) throws SQLException {
+        if (db == null) {
+            openDatabase();
+        }
+        int max = 0;
+        try {
+            ResultSet rs = db.executeQuery("select max(rowid) as max from " + table);
+                while (rs.next()) { // read the result set
+                    max = rs.getInt("max");
+                }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return max;
+    }
+
     public static SqliteDatabase getDB() throws SQLException {
         if (db == null) {
             openDatabase();

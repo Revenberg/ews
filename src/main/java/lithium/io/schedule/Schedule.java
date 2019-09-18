@@ -21,11 +21,8 @@ import java.io.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,89 +38,54 @@ public class Schedule {
 	private static Logger log = Logger.getLogger(Schedule.class.getName());
 	public static SqliteDatabase db = new SqliteDatabase();
 
-	public Schedule() {		
+	public Schedule() {
 	}
 
-/*	public void addPresentation(String title) throws SQLException {
-		Presentation presentation = new Presentation(title);
-		Slide slide = new Slide(presentation.getpresentation_id1(), presentation.getpresentation_id2());
-		Song song = new Song();
-	}
-*/
+	/*
+	 * public void addPresentation(String title) throws SQLException { Presentation
+	 * presentation = new Presentation(title); Slide slide = new
+	 * Slide(presentation.getpresentation_id1(),
+	 * presentation.getpresentation_id2()); Song song = new Song(); }
+	 */
 	public void open(String src, String dest) throws SQLException {
 		log.info("open");
 
 		try {
-			ZipFile zipFile = new ZipFile(src);
-			Enumeration<?> enu = zipFile.entries();
-			while (enu.hasMoreElements()) {
-				ZipEntry zipEntry = (ZipEntry) enu.nextElement();
-
-				String name = dest + "/" + zipEntry.getName();
-				// long size = zipEntry.getSize();
-				// long compressedSize = zipEntry.getCompressedSize();
-				// log.info("name: %-20s | size: %6d | compressed size: %6d\n",
-				// name, size, compressedSize);
-
-				File file = new File(name);
-				log.info("name: " + name);
-				if (name.endsWith("/")) {
-					file.mkdirs();
-					continue;
-				}
-
-				File parent = file.getParentFile();
-				if (parent != null) {
-					parent.mkdirs();
-				}
-
-				InputStream is = zipFile.getInputStream(zipEntry);
-				FileOutputStream fos = new FileOutputStream(file);
-				byte[] bytes = new byte[1024];
-				int length;
-				while ((length = is.read(bytes)) >= 0) {
-					fos.write(bytes, 0, length);
-				}
-				is.close();
-				fos.close();
-
-			}
-			zipFile.close();
+			Tools.unzip(src, dest);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		db.open(dest + "/main.db");
 
-		
 		db.executeUpdate("BEGIN TRANSACTION;");
 		db.executeUpdate("DELETE from 'slide'");
 		db.executeUpdate("DELETE from 'element'");
 		db.executeUpdate("DELETE from 'presentation'");
-		db.executeUpdate("DELETE from 'element_property'");		
-		db.executeUpdate("DELETE from 'element_property_group'");		
+		db.executeUpdate("DELETE from 'element_property'");
+		db.executeUpdate("DELETE from 'element_property_group'");
 		db.executeUpdate("COMMIT;");
 	}
 
 	public void close(String src, String dest) throws IOException {
 		log.info("close");
 		db.close();
-		
-			final File folder = new File(src);
 
-			List<String> result = new ArrayList<>();
+		final File folder = new File(src);
 
-			search(".*", folder, result, "");
+		List<String> result = new ArrayList<>();
 
-			FileOutputStream fos = new FileOutputStream(dest);
-			ZipOutputStream zos = new ZipOutputStream(fos);
+		search(".*", folder, result, "");
 
-			for (String s : result) {
-				log.info(s);
-				addToZipFile(s, zos);
-			}
+		FileOutputStream fos = new FileOutputStream(dest);
+		ZipOutputStream zos = new ZipOutputStream(fos);
 
-			zos.close();
-			fos.close();		
+		for (String s : result) {
+			log.info(s);
+			addToZipFile(s, zos);
+		}
+
+		zos.close();
+		fos.close();
 	}
 
 	public static void search(final String pattern, final File folder, List<String> result, final String pre) {

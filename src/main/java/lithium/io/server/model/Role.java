@@ -62,8 +62,8 @@ public class Role {
         return DBORole.getList(userid);
     }
 
-    public void activeRole(Role role) throws SQLException {
-        DBORole.active(role);
+    public void activeRole() throws SQLException {
+        DBORole.active(this);
     }
 
     public void setMe(String s) {

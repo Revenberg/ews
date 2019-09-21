@@ -234,7 +234,7 @@ class Tools
 	throws IOException
 	{
 		final ByteArrayOutputStream out = new ByteArrayOutputStream();
-		final BufferedInputStream buffered = new BufferedInputStream( in );
+	//	final BufferedInputStream buffered = new BufferedInputStream( in );
 		for ( int i = 0; i < limit; i++ )
 		{
 			final int b = in.read();

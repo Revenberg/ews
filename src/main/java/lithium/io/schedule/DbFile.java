@@ -17,10 +17,10 @@
 package lithium.io.schedule;
 
 import java.sql.SQLException;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
 public class DbFile {
-    private static Logger log = Logger.getLogger(DbFile.class.getName());
+    //private static Logger log = Logger.getLogger(DbFile.class.getName());
     private static int rowid = 0;
 
     private static int nextRowId() {

@@ -43,7 +43,7 @@ public class Element {
     public void addPage(int slide_id) throws SQLException {
         String sql;
         int row_id;
-        int epg;
+   //     int epg;
         // BACKGROUND
         row_id = nextRowId();
         sql = "INSERT INTO 'element' ('rowid','slide_id','element_uid','element_type','element_style_type','order_index','x','y','width','height','background_resource_id','foreground_resource_id','internal_mute','from_master') "

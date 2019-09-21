@@ -74,11 +74,12 @@ public class RolesManagementController {
         return Response.status(HttpStatus.NOT_FOUND_404).build();
     }
     */
-    @GET
+    @POST
     @Path("activate")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response activateRole(Role role) throws SQLException {
-        role.activeRole(role);
+        role.activeRole();
         return Response.status(HttpStatus.OK_200).build();
     }
 }

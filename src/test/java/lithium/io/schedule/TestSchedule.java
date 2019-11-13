@@ -22,47 +22,6 @@ import junit.framework.TestCase;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Logger;
-/*import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-import java.util.Date;
-import java.util.List;
-
-
-import junit.framework.TestCase;
-/*import static lithium.io.jrtf.Rtf.rtf;
-import static lithium.io.jrtf.RtfHeader.font;
-import static lithium.io.jrtf.RtfPara.*;
-import static lithium.io.jrtf.RtfText.*;
-import static lithium.io.jrtf.RtfUnit.CM;
-
-import lithium.io.jrtf.Rtf;
-import lithium.io.jrtf.RtfHeaderFont;
-import lithium.io.jrtf.RtfPara;
-import lithium.io.jrtf.RtfText;
-import lithium.io.rtf.ControlWord;
-import lithium.io.rtf.RtfGroup;
-import lithium.io.rtf.RtfWriter;
-
-import lithium.io.schedule.*;
-
-/*import java.io.*;
-import java.nio.*;
-import java.nio.charset.*;
-import java.util.*;
-
-import junit.framework.*;
-import lithium.io.rtf.*;
-
-/*import static lithium.io.jrtf.Rtf.rtf;
-import static lithium.io.jrtf.RtfHeader.font;
-import static lithium.io.jrtf.RtfPara.*;
-import static lithium.io.jrtf.RtfText.*;
-import static lithium.io.jrtf.RtfUnit.CM;
-import lithium.io.jrtf.*;
-*/
 
 /**
  * Test case for {@link EwsParser}.
@@ -83,7 +42,7 @@ public class TestSchedule extends TestCase {
 		Schedule schedule = new Schedule();
 
 		schedule.open("./empty.ewsx", Tools.tempDir);
-/*			
+			
 		Presentation presentation1 = new Presentation(6, "mijn test");		
 		Presentation presentation0 = new Presentation(13, "Blank");		
 
@@ -126,7 +85,7 @@ public class TestSchedule extends TestCase {
 					+ Integer.toString(i)
 					+ "\\par}\n\n{\\pard\\sdlistlevel0\\qc\\qdef\\sdewparatemplatestyle101{\\*\\sdasfactor 1}{\\*\\sdasbaseline 32.4}\\sdastextstyle101\\plain\\sdewtemplatestyle101\\fs64{\\*\\sdfsreal 32.4}{\\*\\sdfsdef 32.4}\\sdfsauto Song "
 					+ Integer.toString(i) + "\\par}\n\n}";
-					slide3.getElement().addTextPage(slide3.addSlide(presentation3.getpresentation_id()), rtf);
+					slide3.getElement().addTextPage(slide3.addSlide(presentation3.getpresentation_id(), 2083), rtf);
 		}
 
 		Slide slide4 = new Slide();
@@ -135,14 +94,18 @@ public class TestSchedule extends TestCase {
 					+ Integer.toString(i)
 					+ "\\par}\n\n{\\pard\\sdlistlevel0\\qc\\qdef\\sdewparatemplatestyle101{\\*\\sdasfactor 1}{\\*\\sdasbaseline 32.4}\\sdastextstyle101\\plain\\sdewtemplatestyle101\\fs64{\\*\\sdfsreal 32.4}{\\*\\sdfsdef 32.4}\\sdfsauto Song "
 					+ Integer.toString(i) + "\\par}\n\n}";
-					slide4.getElement().addTextPage(slide4.addSlide(presentation4.getpresentation_id()), rtf);
+					slide4.getElement().addTextPage(slide4.addSlide(presentation4.getpresentation_id(), 2083), rtf);
 		}
 
-*/
 		schedule.close(Tools.tempDir, "new.ewsx");
 
 		// Tools.deleteFolder(Tools.tempDir);
 
 
+	}
+
+	public static void main(String[] args) throws SQLException, IOException {
+		TestSchedule test = new TestSchedule();
+		test.testSongs();
 	}
 }

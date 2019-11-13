@@ -128,7 +128,7 @@ public class Schedule {
 	}
 
 	public static void deleteFolder(String folder) {
-		File index = new File(folder);
+		File index = new File(folder);		
 		if (!index.exists()) {
 			index.mkdir();
 		} else {

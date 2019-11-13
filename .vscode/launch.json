@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - TestSchedule",
+            "request": "launch",
+            "mainClass": "lithium.io.schedule.TestSchedule",
+            "projectName": "ews"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TestSchedule",
+            "request": "launch",
+            "mainClass": "lithium.io.schedule.TestSchedule",
+            "projectName": "lithium-ews"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - MyProcess",
             "request": "launch",
             "mainClass": "test.MyProcess",

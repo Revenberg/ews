@@ -36,7 +36,7 @@ import java.util.Random;
 
 public class Tools {
     private static Logger log = Logger.getLogger(Tools.class.getName());
-    public final static String tempDir = "./temp";
+    public final static String tempDir = "d:/tmp";
 
     public static File copyFile(String fileName) throws IOException {
         InputStream is = null;
